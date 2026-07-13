@@ -212,6 +212,11 @@ class Water_balance(SimulationObject):
             k.TRD = 0.0
         else:
             k.TRD = self.kiosk["TRD"]
+       
+        if "DVS" not in self.kiosk:
+            k.DVS = 0.0
+        else:
+            k.DVS = self.kiosk["DVS"]
 
         r.PE = convert_cm_to_m(drv.ET0 * (1 - k.FI))
         r.PT = convert_cm_to_m(drv.ET0 * k.FI)
@@ -311,7 +316,6 @@ class Water_balance(SimulationObject):
                 FcR = np.array(values_FR)
                 values_SPSI.append(SPSI)
                 SP = np.array(values_SPSI)
-
         
         if k.FI <= 0.0:           
             RBAR = np.inf
@@ -337,12 +341,12 @@ class Water_balance(SimulationObject):
             
             # Actual evapotranspiration        
             r.TL= np.multiply(np.where(arr_bool, arr_TRUE, LOSS), p.TCK)
-            r.AT = np.append(r.EVS, r.TL)
-            r.T = np.sum(r.TL)
-            r.net_RW = np.subtract(RWATER, r.AT)
             
-           
-
+        # Common calculations for both bare soil and crop      
+        r.AT = np.append(r.EVS, r.TL)
+        r.T = np.sum(r.TL)
+        r.net_RW = np.subtract(RWATER, r.AT)
+                   
     @prepare_states
     def integrate(self, day,delt):
         p = self.params
