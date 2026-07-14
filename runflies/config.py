@@ -13,7 +13,7 @@ data_dir = os.path.join(top_dir, "data")
 # ------- SETTINGS FOR CAMPBELL-DIAZ MODEL --------
 
 # Weather data
-weather_fname = os.path.join(data_dir, "Field50.xls")
+weather_fname = os.path.join(data_dir, "Field50.xlsx")
                              
 # model parameters
 crop_fname = os.path.join(data_dir, "wofost_soybean_parameters.dat")
