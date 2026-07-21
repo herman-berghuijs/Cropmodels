@@ -205,7 +205,7 @@ class SoybeanPhenology(SimulationObject):
     #-------------------------------------------------------------------------------
     class StateVariables(StatesTemplate):
         DVS   = Float(-99.)  # Development stage
-        TSUM  = Float(-99.)  # Temperature sum state
+        # TSUM  = Float(-99.)  # Temperature sum state
         TSUME = Float(-99.)  # Temperature sum for emergence state
         # States which register phenological events
         DOS = Instance(date)  # Day of sowing
@@ -237,7 +237,8 @@ class SoybeanPhenology(SimulationObject):
         DVS = self.params.DVSI
         DOS, DOE, STAGE = self._get_initial_stage(day)
         self.states = self.StateVariables(kiosk, publish="DVS",
-                                          TSUM=0., TSUME=0., DVS=DVS,
+                                          TSUME=0., DVS=DVS,
+                                          # TSUM=0., TSUME=0., DVS=DVS,
                                           DOS=DOS, DOE=DOE, DOR1=None,
                                           DOR3=None, DOR5=None, DOR8=None,
                                           DOH=None, STAGE=STAGE)
